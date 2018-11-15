@@ -68,7 +68,7 @@ class SinglyLinkedList{
         return newNode;
     }
     get(index) {
-        if (index > this.length) {
+        if (index > this.length || index < 0) {
             return null;
         }
         let getNode = this.head;
@@ -76,6 +76,14 @@ class SinglyLinkedList{
             getNode = getNode.next;
         }
         return getNode;
+    }
+    set(index, val) {
+        let mutatedNode = this.get(index);
+        if (mutatedNode === null) {
+            return null;
+        }
+        mutatedNode.val = val;
+        return mutatedNode;
     }
 }
 
@@ -86,7 +94,13 @@ class SinglyLinkedList{
 // first.next.next.next.next = new Node("you")
 
 var list = new SinglyLinkedList()
-list.push("HELLO")
-list.push("GOODBYE")
-
-
+console.log(list.push("HELLO"))
+console.log(list.push("GOODBYE"))
+console.log(list.pop());
+console.log(list.push("GOODBYE"))
+console.log(list.shift())
+console.log(list);
+console.log(list.unshift("HELLO"))
+console.log(list.get(0))
+console.log(list.get(1))
+console.log(list.set(1,"GOODBYE!"))
