@@ -66,7 +66,36 @@ class DoublyLinkedList{
             this.head = newNode;
         }
         this.length += 1;
-        return list;
+        return this;
+    }
+    get(index) {
+        if (index < 0 || index > this.length) {
+            return null;
+        }
+        let counter;
+        let current;
+        if (index < (this.length - 1) / 2) {
+            counter = 0;
+            current = this.head;
+            while(counter != index) {
+                current = current.next;
+                counter += 1;
+            }
+        } else {
+            counter = this.length - 1;
+            current = this.tail;
+            while(counter != index) {
+                current = current.prev;
+                counter -= 1;
+            }
+        }
+        return current;
+    }
+    set(index, val) {
+        let foundNode = this.get(index);
+        if (foundNode === null) return false;
+        foundNode.val = val;
+        return true;
     }
 }
 
@@ -76,6 +105,12 @@ list.push('two');
 list.push('three');
 console.log(list.pop());
 list.push('three');
+list.push('four');
 console.log(list.shift());
 console.log(list.unshift('first'));
+console.log(list.get(0));
+console.log(list.get(1));
+console.log(list.get(2));
+console.log(list.get(3));
+console.log(list)
 
