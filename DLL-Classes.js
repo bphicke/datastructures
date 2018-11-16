@@ -97,6 +97,23 @@ class DoublyLinkedList{
         foundNode.val = val;
         return true;
     }
+    insert (index, val) {
+        if (index < 0 || index > this.length) return false;
+        if (index === 0) {
+            return !!this.unshift(val);
+        }
+        if (index === this.length) {
+            return !!this.push(val);
+        }
+        let newNode = new Node(val);
+        let pre = this.get(index - 1);
+        newNode.prev = pre;
+        newNode.next = pre.next;
+        pre.next.prev = newNode;
+        pre.next = newNode;
+        this.length += 1;
+        return true;
+    } 
 }
 
 const list = new DoublyLinkedList();
