@@ -30,9 +30,30 @@ class DoublyLinkedList{
             return null;
         }
         let poppedNode = this.tail;
+        if(this.length === 1) {
+            this.head = null;
+            this.tail = null;
+        }
         this.tail = this.tail.prev;
         this.tail.next = null;
+        this.length -= 1;
+        poppedNode.prev = null;
         return poppedNode;
+    }
+    shift() {
+        if (this.length === 0) {
+            return null;
+        }
+        let removedNode = this.head;
+        if (this.length === 1) {
+            this.head = null;
+            this.tail = null;
+        } else {
+            this.head = this.head.next;
+        }
+        this.length -= 1;
+        removedNode.next = null;
+        return removedNode;
     }
 }
 
