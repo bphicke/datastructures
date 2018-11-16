@@ -80,10 +80,76 @@ class SinglyLinkedList{
     set(index, val) {
         let mutatedNode = this.get(index);
         if (mutatedNode === null) {
-            return null;
+            return false;
         }
         mutatedNode.val = val;
-        return mutatedNode;
+        return true;
+    }
+    insert(index, val) {
+        if (index < 0 || index > this.length) {
+            return false;
+        }
+        if (index === 0) {
+            this.unshift(val);
+            return true;
+        }
+        if (index === this.length) {
+            this.push(val);
+            return true;
+        }
+        let pre = this.get(index - 1);
+        let newNode = new Node(val);
+        newNode.next = pre.next;
+        pre.next = newNode;
+        this.length += 1;
+        return true;
+    }
+    remove(index) {
+        if (index < 0 || index > this.length) {
+            return null;
+        }
+        if (index === 0) {
+            return this.shift();
+        }
+        if (index === this.length - 1) {
+            return this.pop();
+        }
+        let pre = this.get(index - 1);
+        let temp = pre.next;
+        pre.next = temp.next;
+        this.length -= 1;
+        return temp;
+    }
+    reverse () {
+        if (this.length < 2) {
+            return this;
+        }
+        let pre = null;
+        let current = this.head;
+        let next = current.next;
+        this.head = this.tail;
+        this.tail = current;
+        if (this.length === 2) {
+            this.tail.next = null;
+            this.head.next = this.tail;
+        }
+        while(next) {
+            current.next = pre;
+            pre = current;
+            current = next;
+            next = next.next;
+        }
+        current.next = pre;
+        return this;
+    }
+    print() {
+        let arr = [];
+        let current = this.head;
+        while(current) {
+            arr.push(current.val);
+            current = current.next;
+        }
+        return arr;
     }
 }
 
@@ -104,3 +170,10 @@ console.log(list.unshift("HELLO"))
 console.log(list.get(0))
 console.log(list.get(1))
 console.log(list.set(1,"GOODBYE!"))
+console.log(list.set(2, "This should be false"))
+list.push('Second');
+list.push('First');
+console.log(list);
+console.log(list.print());
+console.log(list.reverse());
+console.log(list.print());
