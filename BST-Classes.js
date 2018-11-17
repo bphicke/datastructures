@@ -46,7 +46,8 @@ class BinarySearchTree {
         }
         return false;
     }
-    BFS(current = this.root) {
+    BFS() {
+        let current = this.root;
         if (current === null) return null;
         let visited = [];
         let queue = [];
@@ -59,12 +60,24 @@ class BinarySearchTree {
         }
         return visited;
     }
-    DFS(current = this.root) {
+    DFSPreOrder() {
+        let current = this.root;
         let visited = [];
         let traverse = (current) => {
             visited.push(current.value);
             if(current.left) traverse(current.left);
             if(current.right) traverse(current.right);
+        }
+        traverse(current);
+        return visited;
+    }
+    DFSPostOrder () {
+        let current = this.root;
+        let visited = [];
+        let traverse = (current) => {
+            if(current.left) traverse(current.left);
+            if(current.right) traverse(current.right);
+            visited.push(current.value);
         }
         traverse(current);
         return visited;
