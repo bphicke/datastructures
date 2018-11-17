@@ -12,7 +12,7 @@ class BinarySearchTree {
     }
     insert(val) {
         if (!this.root) {
-            this.root = newNode(val);
+            this.root = new Node(val);
             return this;
         }
         let current = this.root;
@@ -46,13 +46,26 @@ class BinarySearchTree {
         }
         return false;
     }
+    BFS(current = this.root) {
+        if (current === null) return null;
+        let visited = [];
+        let queue = [];
+        queue.push(current);
+        while(queue.length) {
+            current = queue.shift();
+            visited.push(current.value);
+            if(current.left) queue.push(current.left);
+            if(current.right) queue.push(current.right);
+        }
+        return visited;
+    }
 }
 
 var tree = new BinarySearchTree();
-tree.root = new Node(10);
-tree.root.right = new Node(15);
-tree.root.left = new Node(7);
-tree.root.left.right = new Node(9);
-tree.insert(13);
-console.log(tree.find(12));
-console.log(tree.find(13));
+tree.insert(10);
+tree.insert(6);
+tree.insert(15);
+tree.insert(3);
+tree.insert(8);
+tree.insert(20);
+console.log(tree.BFS());
