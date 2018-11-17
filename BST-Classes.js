@@ -82,6 +82,17 @@ class BinarySearchTree {
         traverse(current);
         return visited;
     }
+    DFSInOrder() {
+        let current = this.root;
+        let visited = [];
+        let traverse = (current) => {
+            if(current.left) traverse(current.left);
+            visited.push(current.value);
+            if(current.right) traverse(current.right);
+        }
+        traverse(current);
+        return visited;
+    }
 }
 
 var tree = new BinarySearchTree();
