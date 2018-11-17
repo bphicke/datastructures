@@ -59,6 +59,16 @@ class BinarySearchTree {
         }
         return visited;
     }
+    DFS(current = this.root) {
+        let visited = [];
+        let traverse = (current) => {
+            visited.push(current.value);
+            if(current.left) traverse(current.left);
+            if(current.right) traverse(current.right);
+        }
+        traverse(current);
+        return visited;
+    }
 }
 
 var tree = new BinarySearchTree();
@@ -68,4 +78,4 @@ tree.insert(15);
 tree.insert(3);
 tree.insert(8);
 tree.insert(20);
-console.log(tree.BFS());
+console.log(tree.DFS());
